@@ -30,7 +30,7 @@ export class CompanyService {
   ) {
     try {
       await this.companyRepository.findOneOrFail(conditions, options);
-      return this.companyRepository.findOne({
+      return await this.companyRepository.findOne({
         select: ['id', 'name', 'email', 'provider']
       })
     } catch (error) {
@@ -42,9 +42,8 @@ export class CompanyService {
     const user = await this.findOneOrFail({ id });
     this.companyRepository.merge(user, data);
     await this.companyRepository.save(user);
-    return this.companyRepository.findOne({
+    return await this.companyRepository.findOne({
       select: ['id', 'name', 'email', 'provider', 'updatedAtt']
-
     })
   }
 
