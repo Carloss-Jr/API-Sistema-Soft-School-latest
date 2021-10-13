@@ -41,8 +41,8 @@ export class CompanyController {
     type: CompanyResponse
   })
   @Get(':id')
-  async findOne(@Param('id', new ParseIntPipe()) id: number) {
-    return await this.companyService.findOneOrFail({ id });
+  async findOne(@Param('id', new ParseIntPipe()) id: string) {
+    return await this.companyService.findOneOrFail({ id: +id });
   }
 
   @ApiOkResponse({
@@ -50,7 +50,7 @@ export class CompanyController {
   })
   @Put(':id')
   async update(
-    @Param('id', new ParseIntPipe()) id: number,
+    @Param('id', new ParseIntPipe()) id: string,
     @Body() body: UpdateCompanyDto,
   ) {
     return this.companyService.update(+id, body);
@@ -62,7 +62,7 @@ export class CompanyController {
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id', new ParseIntPipe()) id: number) {
+  async remove(@Param('id', new ParseIntPipe()) id: string) {
     return this.companyService.remove(+id);
   }
 }
