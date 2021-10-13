@@ -15,7 +15,7 @@ export class UpdateCompanyDto extends PartialType(CreateCompanyDto) {
   @IsNotEmpty()
   @IsEmail()
   @Matches(RegExHelper.emailInvalid, {
-    message: MessagesHelper.EMAIL_NOT_EMPTY,
+    message: MessagesHelper.EMAIL_NOT_EMPTY
   })
   email: string;
 }
