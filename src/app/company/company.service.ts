@@ -20,7 +20,7 @@ export class CompanyService {
 
   async findAll() {
     return await this.companyRepository.find({
-      select: ['id', 'name', 'email', 'password'],
+      select: ['id', 'name', 'email', 'provider'],
     });
   }
 
@@ -29,7 +29,10 @@ export class CompanyService {
     options?: FindOneOptions<CompanyEntity>,
   ) {
     try {
-      return await this.companyRepository.findOneOrFail(conditions, options);
+      await this.companyRepository.findOneOrFail(conditions, options);
+      return this.companyRepository.findOne({
+        select: ['id', 'name', 'email', 'provider']
+      })
     } catch (error) {
       throw new NotAcceptableException(error.message);
     }
@@ -38,7 +41,11 @@ export class CompanyService {
   async update(id: number, data: UpdateCompanyDto) {
     const user = await this.findOneOrFail({ id });
     this.companyRepository.merge(user, data);
-    return await this.companyRepository.save(user);
+    await this.companyRepository.save(user);
+    return this.companyRepository.findOne({
+      select: ['id', 'name', 'email', 'provider', 'updatedAtt']
+
+    })
   }
 
   async remove(id: number) {
