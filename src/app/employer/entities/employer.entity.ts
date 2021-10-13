@@ -4,15 +4,16 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
-import { Employer } from '../../employer/entities/employer.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
 
-@Entity('tab_company')
-export class CompanyEntity {
+@Entity('tab_employers')
+export class Employer {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -23,7 +24,7 @@ export class CompanyEntity {
   email: string;
 
   @Column()
-  cnpj: string;
+  cpf: string;
 
   @Column()
   password: string;
@@ -36,8 +37,8 @@ export class CompanyEntity {
   @Column({ default: true })
   provider: boolean;
 
-  @OneToMany(type => Employer, company => CompanyEntity)
-  employers: Employer
+  @ManyToOne(type => CompanyEntity, employers => Employer)
+  company: CompanyEntity
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAtt: Date;
@@ -48,3 +49,4 @@ export class CompanyEntity {
   @DeleteDateColumn({ name: 'delete_at', type: 'timestamp' })
   deleteAtt: Date;
 }
+

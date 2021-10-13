@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CompanyModule } from './app/company/company.module';
 import { CompanyController } from './app/company/company.controller';
+import { EmployerModule } from './app/employer/employer.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { CompanyController } from './app/company/company.controller';
     } as TypeOrmModuleOptions),
     CompanyModule,
     AuthModule,
+    EmployerModule,
   ],
   controllers: [AppController, CompanyController],
   providers: [AppService],
