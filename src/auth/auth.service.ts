@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { CompanyService } from '../company/company.service';
-import { CompanyEntity } from '../company/entities/company.entity';
-import { compareSync } from 'bcrypt';
+import { CompanyService } from '../app/company/company.service';
+import { CompanyEntity } from '../app/company/entities/company.entity';
+import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -25,10 +25,10 @@ export class AuthService {
     try {
       user = await this.usersService.findOneOrFail({ email });
     } catch (error) {
-      return null;
+      return console.log(user);
     }
 
-    const isPasswordValid = compareSync(password, user.password);
+    const isPasswordValid = bcrypt.compare(password, user.password);
     if (!isPasswordValid) return null;
     return user;
   }
