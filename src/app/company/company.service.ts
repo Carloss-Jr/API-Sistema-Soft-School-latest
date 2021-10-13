@@ -29,10 +29,7 @@ export class CompanyService {
     options?: FindOneOptions<CompanyEntity>,
   ) {
     try {
-      await this.companyRepository.findOneOrFail(conditions, options);
-      return this.companyRepository.findOneOrFail({
-        select: ['id', 'name', 'email', 'provider']
-      })
+      return await this.companyRepository.findOneOrFail(conditions, options);
     } catch (error) {
       throw new NotAcceptableException(error.message);
     }
