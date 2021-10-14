@@ -4,13 +4,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
-import { CompanyEntity } from './entities/company.entity';
+import { CompanyEntity } from '../../entities/company.entity';
 
 @Injectable()
 export class CompanyService {
   constructor(
     @InjectRepository(CompanyEntity)
-    private companyRepository: Repository<CompanyEntity>,
+    private readonly companyRepository: Repository<CompanyEntity>,
   ) { }
 
   async create(data: CreateCompanyDto) {

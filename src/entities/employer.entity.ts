@@ -4,16 +4,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
-import { CompanyEntity } from '../../company/entities/company.entity';
+import { CompanyEntity } from './company.entity';
 
 @Entity('tab_employers')
-export class Employer {
+export class EmployerEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,10 +33,10 @@ export class Employer {
     this.password = hashSync(this.password, 10);
   }
 
-  @Column({ default: true })
+  @Column({ default: false })
   provider: boolean;
 
-  @ManyToOne(type => CompanyEntity, employers => Employer)
+  @ManyToOne(type => CompanyEntity, employers => EmployerEntity)
   company: CompanyEntity
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

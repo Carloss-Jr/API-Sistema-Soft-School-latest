@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
-import { Employer } from '../../employer/entities/employer.entity';
+import { EmployerEntity } from './employer.entity';
 
 @Entity('tab_company')
 export class CompanyEntity {
@@ -36,8 +36,8 @@ export class CompanyEntity {
   @Column({ default: true })
   provider: boolean;
 
-  @OneToMany(type => Employer, company => CompanyEntity)
-  employers: Employer
+  @OneToMany(type => EmployerEntity, company => CompanyEntity)
+  employers: EmployerEntity[]
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAtt: Date;

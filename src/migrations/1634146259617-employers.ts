@@ -34,7 +34,7 @@ export class employers1634146259617 implements MigrationInterface {
                         isNullable: false,
                     },
                     {
-                        name: 'company',
+                        name: 'provider',
                         type: 'boolean',
                         default: 'false',
                         isNullable: false,

@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { CompanyModule } from './app/company/company.module';
 import { CompanyController } from './app/company/company.controller';
 import { EmployerModule } from './app/employer/employer.module';
-
+import * as path from 'path'
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -26,13 +26,14 @@ import { EmployerModule } from './app/employer/employer.module';
           rejectUnauthorized: false,
         },
       },
-      entities: [__dirname + '/**/**/*.entity{.js,.ts}'],
-      // migrations: [__dirname + '/database/migrations/*.js,.ts'],
-      // cli: {
-      //   migrationsDir: __dirname + '/database/migrations',
-      // },
+      entities: [path.resolve(__dirname + '/entities/*.entity{.js,.ts}')],
+      migrations: [path.resolve(__dirname + '/database/migrations/*.js,.ts')],
+      cli: [
+        { migrationsDir: [path.resolve(__dirname + '/database/migrations')] },
+      ],
     } as TypeOrmModuleOptions),
     CompanyModule,
+    EmployerModule,
     AuthModule,
     EmployerModule,
   ],

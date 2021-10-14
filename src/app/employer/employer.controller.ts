@@ -1,34 +1,35 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, UseGuards } from '@nestjs/common';
 import { EmployerService } from './employer.service';
 import { CreateEmployerDto } from './dto/create-employer.dto';
 import { UpdateEmployerDto } from './dto/update-employer.dto';
+import { AuthGuard } from '@nestjs/passport';
 
-@Controller('employer')
+@Controller('api/v1/employer')
 export class EmployerController {
-  constructor(private readonly employerService: EmployerService) {}
-
+  constructor(private readonly employerService: EmployerService) { }
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() createEmployerDto: CreateEmployerDto) {
-    return this.employerService.create(createEmployerDto);
+  async create(@Body() body: CreateEmployerDto) {
+    return this.employerService.create(body);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.employerService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.employerService.findOne(+id);
+  async findOne(@Param('id', new ParseIntPipe()) id: string) {
+    return this.employerService.findOneOrFail({ id: +id });
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmployerDto: UpdateEmployerDto) {
-    return this.employerService.update(+id, updateEmployerDto);
+  @Put(':id')
+  async update(@Param('id', new ParseIntPipe()) id: string, @Body() body: UpdateEmployerDto) {
+    return this.employerService.update(+id, body);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id', new ParseIntPipe()) id: string) {
     return this.employerService.remove(+id);
   }
 }
