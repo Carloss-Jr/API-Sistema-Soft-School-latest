@@ -48,7 +48,7 @@ $ npm run test:cov
 ## Stay in touch
 
 - Author - [Carlos Jr](https://github.com/Carloss-Jr)
-- Website - [https://heroku.com](https://api-sistema-soft-school.herokuapp.com/api/)
+- Website - [https://api-sistema-soft-school.herokuapp.com/api/](https://api-sistema-soft-school.herokuapp.com/api/)
 
 ## License
 
