@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
@@ -15,7 +15,9 @@ export class AuthController {
   }
   )
   @Post('login')
-  async login(@Req() req: any) {
-    return await this.authService.login(req.user);
+  async login(
+    @Req() req: any,
+    @Body() body: AuthResponse) {
+    return await this.authService.login(body);
   }
 }
