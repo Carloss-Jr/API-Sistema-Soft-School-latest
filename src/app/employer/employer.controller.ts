@@ -7,7 +7,7 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('api/v1/employer')
 export class EmployerController {
   constructor(private readonly employerService: EmployerService) { }
-  @UseGuards(AuthGuard('jwt'))
+
   @Post()
   async create(@Body() body: CreateEmployerDto) {
     return this.employerService.create(body);
