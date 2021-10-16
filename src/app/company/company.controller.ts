@@ -57,7 +57,6 @@ export class CompanyController {
   }
 
   @ApiOkResponse({
-
   })
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
