@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const options = new DocumentBuilder()
     .setTitle('Nest.js API Soft School')
-    .setDescription('Documentacao da API ')
+    .setDescription('Documentacao da API, Obs: Login de funcionários(employers) funcionando normalmente ')
     .build()
 
   const document = SwaggerModule.createDocument(app, options)
