@@ -60,7 +60,6 @@ export class CompanyController {
 
   })
   @Delete(':id')
-  @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id', new ParseIntPipe()) id: string) {
     return this.companyService.remove(+id);
