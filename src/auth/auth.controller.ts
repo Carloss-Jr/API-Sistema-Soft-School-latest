@@ -2,14 +2,14 @@
 import { Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
 import { AuthResponse } from 'src/documentation/auth.response';
 
 @Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
-  @ApiOkResponse({
+  @ApiCreatedResponse({
     type: AuthResponse
   }
   )
